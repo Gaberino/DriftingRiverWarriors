@@ -36,8 +36,8 @@ public class Brain : ScriptableObject {
 	}
 
 	public virtual void RunBrain(){
-		MovementInput = new Vector2(InputManager.ActiveDevice.LeftStickX.Value, InputManager.ActiveDevice.LeftStickY.Value);
-		AimingInput = new Vector2(InputManager.ActiveDevice.RightStickX.Value, InputManager.ActiveDevice.RightStickY.Value);
+		MovementInput = new Vector2(InputManager.Devices[0].LeftStickX.Value, InputManager.ActiveDevice.LeftStickY.Value);
+		AimingInput = new Vector2(InputManager.Devices[0].RightStickX.Value, InputManager.ActiveDevice.RightStickY.Value);
 
 		JumpButtonDown = Input.GetButtonDown(jumpButtonName);
 		JumpButtonHeld = Input.GetButton(jumpButtonName);

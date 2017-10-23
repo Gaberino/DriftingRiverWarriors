@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839b98cff11163345ad06bcaa834ab61, type: 3}
   m_Name: DefaultBrain
   m_EditorClassIdentifier: 
-  playerSpeed: 15
+  playerSpeed: 6
   playerJumpDuration: 0.5
   drowningSpeedModifier: 0.3
   timeToDrown: 5
@@ -54,5 +54,5 @@ MonoBehaviour:
   JumpButtonHeld: 0
   JumpButtonUp: 0
   AttackButtonDown: 0
-  AttackButtonHeld: 0
+  AttackButtonHeld: 1
   AttackButtonUp: 0

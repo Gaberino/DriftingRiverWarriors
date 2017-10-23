@@ -243,7 +243,7 @@ public class JumpState : PlayerState {
 		//jumpVector = stateOwner.velocity;
 		timer = 0;
 		originalScale = stateOwner.transform.localScale;
-
+		ParticleOverlord.instance.SpawnParticle(stateOwner.transform.position, "JumpStartParticle");
 	}
 
 	public void Run(){
@@ -262,6 +262,7 @@ public class JumpState : PlayerState {
 
 	public void Exit(){
 		stateOwner.ToggleRigidbody(true);
+		ParticleOverlord.instance.SpawnParticle(stateOwner.transform.position, "JumpStartParticle");
 	}
 }
 
