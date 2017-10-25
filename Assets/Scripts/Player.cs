@@ -27,11 +27,15 @@ public class Player : MonoBehaviour {
 
 	#region StartingStuff
 
-	void Start () {
+	void Awake(){
 		//intialize singleton
 		if (instance == null) {
 			instance = this;
 		}
+	}
+
+	void Start () {
+
 
 		//initialize brain
 		myBrain.AttachBrain(this);
@@ -149,7 +153,8 @@ public class Player : MonoBehaviour {
 	public void HitPlayer(Vector2 impactForce){
 		Debug.Log ("WasHit");
 		velocity = impactForce;
-						ChangeState(new StunnedState(this));
+		ChangeState(new StunnedState(this));
+		CamControl.instance.Shake ();
 		//push the player and put them in hitstun
 	}
 
@@ -174,9 +179,12 @@ public interface PlayerState {
 
 public class NormalState : PlayerState { //the default player movestate
 	Player stateOwner;
-
+	Transform interestTransform;
 	public NormalState(Player inputOwner){
 		stateOwner = inputOwner;
+		GameObject interestTransformObj = new GameObject("RS InterestObject");
+		interestTransform = interestTransformObj.transform;
+		CamControl.instance.camInterests.Add(interestTransform);
 	}
 
 	public string GetName(){
@@ -184,7 +192,10 @@ public class NormalState : PlayerState { //the default player movestate
 	}
 
 	public void Enter(){
-
+		stateOwner.overGround = true;
+//		GameObject interestTransformObj = new GameObject("RS InterestObject");
+//		interestTransform = interestTransformObj.transform;
+		CamControl.instance.camInterests.Add(interestTransform);
 	}
 
 	public void Run(){
@@ -200,10 +211,12 @@ public class NormalState : PlayerState { //the default player movestate
 //		if (stateOwner.overGround && !stateOwner.midAir && stateOwner.transform.position.y > 3f) {
 //			stateOwner.velocity += Vector2.down * GameManager.gm_Singleton.riverSpeed * Time.deltaTime;
 //		}
+		interestTransform.position = stateOwner.transform.position + ((Vector3)stateOwner.myBrain.AimingInput * stateOwner.myBrain.rightStickCameraInfluence);
 	}
 
 	public void Exit(){
-
+		CamControl.instance.camInterests.Remove(interestTransform);
+		MonoBehaviour.Destroy (interestTransform.gameObject);
 	}
 }
 
@@ -272,6 +285,7 @@ public class JumpState : PlayerState {
 	public void Exit(){
 		stateOwner.ToggleRigidbody(true);
 		ParticleOverlord.instance.SpawnParticle(stateOwner.transform.position, "JumpStartParticle");
+		stateOwner.overGround = true;
 	}
 }
 

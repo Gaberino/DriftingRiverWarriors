@@ -21,6 +21,7 @@ public class Brain : ScriptableObject {
 
 	public Vector2 MovementInput;
 	public Vector2 AimingInput;
+	public float rightStickCameraInfluence = 1f;
 	public bool JumpButtonDown;
 	public bool JumpButtonHeld;
 	public bool JumpButtonUp;
@@ -36,8 +37,8 @@ public class Brain : ScriptableObject {
 	}
 
 	public virtual void RunBrain(){
-		MovementInput = new Vector2(InputManager.Devices[0].LeftStickX.Value, InputManager.ActiveDevice.LeftStickY.Value);
-		AimingInput = new Vector2(InputManager.Devices[0].RightStickX.Value, InputManager.ActiveDevice.RightStickY.Value);
+		MovementInput = new Vector2(InputManager.ActiveDevice.LeftStickX.Value, InputManager.ActiveDevice.LeftStickY.Value);
+		AimingInput = new Vector2(InputManager.ActiveDevice.RightStickX.Value, InputManager.ActiveDevice.RightStickY.Value);
 
 		JumpButtonDown = Input.GetButtonDown(jumpButtonName);
 		JumpButtonHeld = Input.GetButton(jumpButtonName);
