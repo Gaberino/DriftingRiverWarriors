@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839b98cff11163345ad06bcaa834ab61, type: 3}
+  m_Name: LaptopBrain
+  m_EditorClassIdentifier: 
+  playerSpeed: 10
+  playerJumpDuration: 0.5
+  drowningSpeedModifier: 0.3
+  timeToDrown: 5
+  dryingRate: 0.05
+  jumpEffectCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 2
+      outSlope: 4.4592237
+      tangentMode: 1
+    - serializedVersion: 2
+      time: 0.2506445
+      value: 1.6006382
+      inSlope: 0.4339218
+      outSlope: 0.4339218
+      tangentMode: 1
+    - serializedVersion: 2
+      time: 0.6526369
+      value: 1.5960972
+      inSlope: -0.4649204
+      outSlope: -0.9900772
+      tangentMode: 1
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: -1.7160637
+      outSlope: 0
+      tangentMode: 5
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  jumpButtonName: Jump
+  attackButtonName: Fire1
+  MovementInput: {x: 0, y: 0}
+  AimingInput: {x: 0, y: 0}
+  rightStickCameraInfluence: 1
+  JumpButtonDown: 0
+  JumpButtonHeld: 0
+  JumpButtonUp: 0
+  AttackButtonDown: 0
+  AttackButtonHeld: 1
+  AttackButtonUp: 0

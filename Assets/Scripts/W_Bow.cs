@@ -77,6 +77,7 @@ public class W_Bow : Weapon {
 			if (trajectory.magnitude > 0.1f) {
 				arrowProjectile.transform.parent = null;
 				arrowProjectile.fired = true;
+				ParticleOverlord.instance.SpawnParticle(w_Player.transform.position + bowOffset, "ArrowShotParticle");
 				ammo -= 1;
 				LakeGameManager.instance.ammoNum = ammo;
 			} else {

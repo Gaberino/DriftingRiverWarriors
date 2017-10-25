@@ -130,11 +130,28 @@ public class Player : MonoBehaviour {
 		}
 
 		//check if above ground
-		if (myCollider.IsTouching (LogFilter))
-			overGround = true;
-		else
-			overGround = false;
+//		if (myCollider.IsTouching (LogFilter))
+//			overGround = true;
+//		else
+//			overGround = false;
 	}
+
+	void OnTriggerEnter2D(Collider2D col){
+		if (col.tag == "Log"){
+			overGround = true;
+		}
+	}
+	void OnTriggerStay2D(Collider2D col){
+		if (col.tag == "Log"){
+			overGround = true;
+		}
+	}
+	void OnTriggerExit2D(Collider2D col){
+		if (col.tag == "Log"){
+			overGround = false;
+		}
+	}
+
 
 //	void OnCollisionEnter2D(Collision2D col){
 //		if (col.otherCollider.tag == "Enemy") {
@@ -153,6 +170,7 @@ public class Player : MonoBehaviour {
 	public void HitPlayer(Vector2 impactForce){
 		Debug.Log ("WasHit");
 		velocity = impactForce;
+		ParticleOverlord.instance.SpawnParticle(this.transform.position, "PlayerHitParticle");
 		ChangeState(new StunnedState(this));
 		CamControl.instance.Shake ();
 		//push the player and put them in hitstun
@@ -179,12 +197,12 @@ public interface PlayerState {
 
 public class NormalState : PlayerState { //the default player movestate
 	Player stateOwner;
-	Transform interestTransform;
+	//Transform interestTransform;
 	public NormalState(Player inputOwner){
 		stateOwner = inputOwner;
-		GameObject interestTransformObj = new GameObject("RS InterestObject");
-		interestTransform = interestTransformObj.transform;
-		CamControl.instance.camInterests.Add(interestTransform);
+		//GameObject interestTransformObj = new GameObject("RS InterestObject");
+		//interestTransform = interestTransformObj.transform;
+		//CamControl.instance.camInterests.Add(interestTransform);
 	}
 
 	public string GetName(){
@@ -192,10 +210,10 @@ public class NormalState : PlayerState { //the default player movestate
 	}
 
 	public void Enter(){
-		stateOwner.overGround = true;
+		//stateOwner.overGround = true;
 //		GameObject interestTransformObj = new GameObject("RS InterestObject");
 //		interestTransform = interestTransformObj.transform;
-		CamControl.instance.camInterests.Add(interestTransform);
+		//CamControl.instance.camInterests.Add(interestTransform);
 	}
 
 	public void Run(){
@@ -211,12 +229,12 @@ public class NormalState : PlayerState { //the default player movestate
 //		if (stateOwner.overGround && !stateOwner.midAir && stateOwner.transform.position.y > 3f) {
 //			stateOwner.velocity += Vector2.down * GameManager.gm_Singleton.riverSpeed * Time.deltaTime;
 //		}
-		interestTransform.position = stateOwner.transform.position + ((Vector3)stateOwner.myBrain.AimingInput * stateOwner.myBrain.rightStickCameraInfluence);
+		//interestTransform.position = stateOwner.transform.position + ((Vector3)stateOwner.myBrain.AimingInput * stateOwner.myBrain.rightStickCameraInfluence);
 	}
 
 	public void Exit(){
-		CamControl.instance.camInterests.Remove(interestTransform);
-		MonoBehaviour.Destroy (interestTransform.gameObject);
+		//CamControl.instance.camInterests.Remove(interestTransform);
+		//MonoBehaviour.Destroy (interestTransform.gameObject);
 	}
 }
 
@@ -284,8 +302,13 @@ public class JumpState : PlayerState {
 
 	public void Exit(){
 		stateOwner.ToggleRigidbody(true);
-		ParticleOverlord.instance.SpawnParticle(stateOwner.transform.position, "JumpStartParticle");
-		stateOwner.overGround = true;
+
+		if (stateOwner.overGround){
+			ParticleOverlord.instance.SpawnParticle(stateOwner.transform.position, "JumpEndLogParticle");
+		}
+		else {
+			ParticleOverlord.instance.SpawnParticle(stateOwner.transform.position, "JumpEndWaterParticle");
+		}
 	}
 }
 

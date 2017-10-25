@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour {
 		newTempLog.name = "TempLog";
 		playerToTele.GetComponent<Player>().Teleport(this.transform.position);
 		LakeGameManager.instance.score += scoreValue;
+		ParticleOverlord.instance.SpawnParticle(this.transform.position, "TeleportParticle");
 		Destroy (this.gameObject);
 	}
 
