@@ -126,10 +126,16 @@ public class LakeGameManager : MonoBehaviour {
 			else if (!preppingNextRound && enemiesToSpawnThisRound > 0) {
 				spawnTimer += Time.deltaTime;
 
-				if (spawnTimer > enemySpawnInterval && GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemiesAtOnce) {
+				if (spawnTimer > enemySpawnInterval) {
+					if (thePlayer.currentWeapon.ammo == 0){
+						//continually spawn enemies
+						enemiesToSpawnThisRound += 1;
+					}
 					//spawn
-					SpawnEnemy();
-					enemiesToSpawnThisRound -= 1;
+						if (GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemiesAtOnce){
+						SpawnEnemy();
+						enemiesToSpawnThisRound -= 1;
+					}
 				}
 			}
 
@@ -139,6 +145,8 @@ public class LakeGameManager : MonoBehaviour {
 
 				preppingNextRound = true;
 			}
+			score += Time.deltaTime;
+
 		}
 
 		else if (gameState == 2) {

@@ -40,7 +40,7 @@ public class W_Bow : Weapon {
 		originalStickPosition = w_Player.myBrain.AimingInput;
 		trajectory = Vector2.zero;
 		if (ammo > 0) {
-			GameObject spawnArrow = Instantiate (arrowPrefab, w_Player.transform.position, Quaternion.identity);
+			GameObject spawnArrow = Instantiate (arrowPrefab, w_Player.transform.position + bowOffset, Quaternion.identity);
 			spawnArrow.transform.parent = w_Player.transform;
 			spawnArrow.transform.localEulerAngles = Vector3.zero;
 			spawnArrow.transform.localPosition = bowOffset + myBowBehaviour.middleStringAnchor.localPosition + Vector3.up * (spawnArrow.transform.localScale.y / 2);
@@ -62,7 +62,7 @@ public class W_Bow : Weapon {
 		w_Player.rotation = Mathf.Atan2(trajectory.normalized.y, trajectory.normalized.x) * 57.2958f - 90f;
 		myBowBehaviour.drawAmount = trajectory.magnitude;
 		if (ammo > 0) {
-			arrowProjectile.transform.localPosition = bowOffset + myBowBehaviour.middleStringAnchor.localPosition + Vector3.up * (arrowProjectile.transform.localScale.y);
+			arrowProjectile.transform.localPosition = myBowBehaviour.middleStringAnchor.localPosition + Vector3.up * (arrowProjectile.transform.localScale.y);
 			arrowProjectile.velocity = trajectory * arrowSpeed;
 			arrowProjectile.life = trajectory.magnitude * arrowSpeed * arrowSpeedToLife;
 		}

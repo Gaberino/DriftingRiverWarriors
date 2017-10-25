@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: New W_Bow
   m_EditorClassIdentifier: 
   startingAmmo: 30
-  ammo: 40
+  ammo: 31
   weaponDamage: 1
   weaponPrefab: {fileID: 1641988845577236, guid: 68b656917c58be245ada55bd09312a80,
     type: 2}
@@ -20,6 +20,6 @@ MonoBehaviour:
   aimingCameraMove: 15
   arrowPrefab: {fileID: 1242607986409766, guid: 5b9c6bea487b5fe46a4d016247f2d3d3,
     type: 2}
-  bowOffset: {x: 0, y: 0.75, z: 0}
+  bowOffset: {x: 0, y: 0.5, z: 0}
   arrowSpeed: 0.6
   arrowSpeedToLife: 0.5
