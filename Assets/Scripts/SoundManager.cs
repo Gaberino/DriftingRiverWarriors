@@ -19,6 +19,8 @@ public class SoundManager : MonoBehaviour {
 
 		sources [0] = AudioSourceObject.AddComponent<AudioSource> ();
 		sources [1] = AudioSourceObject.AddComponent<AudioSource> ();
+		sources[0].volume = .7f;
+		sources[1].volume = .7f;
 		sources [0].playOnAwake = false;
 		sources [1].playOnAwake = false;
 
