@@ -6969,7 +6969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3993596a0ccf7e43bf01ef090490ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myBrain: {fileID: 11400000, guid: b3d6c36d0ae646d46bc43b413b4b64a5, type: 2}
+  myBrain: {fileID: 11400000, guid: 97533e7ee9600b34aa10b6952231fc48, type: 2}
   currentWeapon: {fileID: 11400000, guid: 86a9880160654b04fbbcd3f0ab0d19c3, type: 2}
   velocity: {x: 0, y: 0}
   rotation: 0
