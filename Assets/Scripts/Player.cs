@@ -60,18 +60,27 @@ public class Player : MonoBehaviour {
 //		}
 		//check if drowning
 		//wetness = wetness;
-		if (!overGround && !midAir) {
+		if (!overGround) {
 			//Debug.Log("ahhhhhhhh222");
-			wetness += Time.deltaTime;
+			if (!midAir) {
+				wetness += Time.deltaTime;
 
-			if (wetness > myBrain.timeToDrown) {
-				//drowned
-				LakeGameManager.instance.gameState = 2;
-				this.enabled = false;
+				if (wetness > myBrain.timeToDrown) {
+					//drowned
+					LakeGameManager.instance.gameState = 2;
+					this.enabled = false;
+				}
+			} else { //rb disabled cause of jump, so rerun dry function
+				if (wetness > 0f) {
+					wetness -= Time.deltaTime * myBrain.dryingRate;
+				}
+				else if (wetness < 0f){
+					wetness = 0f;
+				}
 			}
 		}
 		else {
-			if (wetness > 0f && !midAir) {
+			if (wetness > 0f) {
 				wetness -= Time.deltaTime * myBrain.dryingRate;
 			}
 			else if (wetness < 0f){
